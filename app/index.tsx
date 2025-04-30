@@ -9,7 +9,9 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text style={{ fontFamily: "Poppins-Regular", fontSize: 20 }}>
+        Hello World
+      </Text>
     </View>
   );
 }
