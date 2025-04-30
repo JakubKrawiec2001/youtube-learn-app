@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Index() {
@@ -12,6 +13,9 @@ export default function Index() {
       <Text style={{ fontFamily: "Poppins-Regular", fontSize: 20 }}>
         Hello World
       </Text>
+      <Link href="/home" push asChild>
+        <Text>Login</Text>
+      </Link>
     </View>
   );
 }
