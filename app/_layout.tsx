@@ -2,7 +2,6 @@ import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { Fonts } from "@/constants/Fonts";
 
 SplashScreen.preventAutoHideAsync();
@@ -26,7 +25,6 @@ export default function RootLayout() {
 	}
 	return (
 		<>
-			<StatusBar style="dark" />
 			<Stack>
 				<Stack.Screen name="index" options={{ headerShown: false }} />
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
