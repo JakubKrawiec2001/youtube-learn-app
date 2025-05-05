@@ -1,8 +1,10 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Colors } from "@/constants/Colors";
 import { searchVideos } from "@/utils";
 import { YouTubeVideo } from "@/types";
+
+import VideosCarousel from "@/components/VideosCarousel";
 
 const HomeScreen = () => {
 	const [videos, setVideos] = useState<YouTubeVideo[]>([]);
@@ -14,41 +16,18 @@ const HomeScreen = () => {
 		fetchData();
 	}, []);
 	return (
-		<View
+		<ScrollView
+			showsVerticalScrollIndicator={false}
 			style={{
-				flex: 1,
+				paddingTop: 40,
+				paddingLeft: 30,
 				backgroundColor: "white",
 			}}>
-			<Text
-				style={{
-					color: Colors.primaryDarkBlue,
-					fontSize: 24,
-					fontWeight: "bold",
-					marginTop: 20,
-				}}>
-				Welcome to the Home
-			</Text>
-			<FlatList
-				data={videos}
-				horizontal={true}
-				keyExtractor={(item) => item.id.videoId}
-				renderItem={({ item }) => (
-					<View
-						style={{
-							backgroundColor: "white",
-							padding: 10,
-							margin: 10,
-							borderRadius: 10,
-							elevation: 2,
-						}}>
-						<Text style={{ color: Colors.primaryDarkBlue }}>
-							{item.snippet.title}
-						</Text>
-					</View>
-				)}
-				style={{ marginTop: 20 }}
-			/>
-		</View>
+			<VideosCarousel videos={videos} label="React Native" />
+			<VideosCarousel videos={videos} label="React" />
+			<VideosCarousel videos={videos} label="Typescript" />
+			<VideosCarousel videos={videos} label="Javascript" />
+		</ScrollView>
 	);
 };
 
