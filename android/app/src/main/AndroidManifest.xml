@@ -33,6 +33,7 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
         <data android:scheme="exp+youtube-learn-app"/>
+        <data android:scheme="com.anonymous.youtubelearnapp"/>
       </intent-filter>
     </activity>
   </application>

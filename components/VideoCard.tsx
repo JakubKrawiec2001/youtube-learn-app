@@ -1,41 +1,58 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useRef } from "react";
 import { Colors } from "@/constants/Colors";
 import { YouTubeVideo } from "@/types";
-import Video, { VideoRef } from "react-native-video";
+import { formatDate } from "@/utils";
+import { Link } from "expo-router";
 
 const VideoCard = ({ data }: { data: YouTubeVideo }) => {
-	const videoRef = useRef<VideoRef>(null);
-	const background = require("@/assets/videos/broadchurch.mp4");
-	return (
-		<View
-			style={{
-				backgroundColor: "white",
-				padding: 10,
-				margin: 10,
-				borderRadius: 10,
-				elevation: 2,
-			}}>
-			<Video
-				source={background}
-				ref={videoRef}
-				style={styles.backgroundVideo}
-			/>
-			<Text style={{ color: Colors.primaryDarkBlue }}>
-				{data.snippet.title}
-			</Text>
-		</View>
-	);
+  return (
+    <Link
+      href={{
+        pathname: "/video/[videoId]",
+        params: { videoId: data.id.videoId },
+      }}
+      asChild
+    >
+      <Pressable style={styles.card}>
+        <Image
+          source={{ uri: data.snippet.thumbnails.medium.url }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+
+        <Text numberOfLines={2} ellipsizeMode="tail" style={styles.title}>
+          {data.snippet.title}
+        </Text>
+        <Text style={styles.date}>{formatDate(data.snippet.publishTime)}</Text>
+      </Pressable>
+    </Link>
+  );
 };
 
 export default VideoCard;
 
-var styles = StyleSheet.create({
-	backgroundVideo: {
-		position: "absolute",
-		top: 0,
-		left: 0,
-		bottom: 0,
-		right: 0,
-	},
+const styles = StyleSheet.create({
+  card: {
+    width: 180,
+    borderRadius: 8,
+    marginRight: 20,
+  },
+  image: {
+    width: "100%",
+    height: 120,
+    borderRadius: 8,
+  },
+  title: {
+    fontSize: 14,
+    marginTop: 6,
+    color: "#2e2e2e",
+    fontWeight: "500",
+  },
+  date: {
+    textAlign: "right",
+    fontSize: 12,
+    color: "#888",
+    marginTop: 4,
+  },
 });
